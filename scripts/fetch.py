@@ -26,6 +26,8 @@ def findItemsByKeywords(keyword):
 			'SECURITY-APPNAME' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9',
 			'RESPONSE-DATA-FORMAT' : 'JSON', 
 			'outputSelector' : 'SellerInfo'}
+			#'paginationInput.entriesPerPage' : '100',
+			#'paginationInput.pageNumber' : '100'}
 
 	url['keywords'] = keyword
 
@@ -64,6 +66,8 @@ def findData(keyword):
 	userItem = {}
 	categoryItem = {}
 	starUser = {}
+	#print len(data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'])
+	#print "\n"
 	for i in range(count):
 		item = {}		
 		item["id"] = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]["itemId"][0]
@@ -101,9 +105,9 @@ def findData(keyword):
 
 	return user, userItem, categoryItem, starUser
 
-'''user, userItem, categoryItem, starUser = findData("hrry putter")
+user, userItem, categoryItem, starUser = findData("hrry putter")
 
-print user['easygoing182']
+'''print user['easygoing182']
 print "\n"
 
 print userItem['easygoing182']
