@@ -2,6 +2,23 @@ import urllib
 import urllib2
 import json
 
+def getSearchKeywordsRecommendation(keyword):
+	url = { 'OPERATION-NAME' : 'getSearchKeywordsRecommendation', 
+			'SERVICE-VERSION' : '1.12.0',
+			'SECURITY-APPNAME' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9',
+			'RESPONSE-DATA-FORMAT' : 'JSON'}
+
+	url['keywords'] = keyword
+
+	payload = urllib.urlencode(url)
+	dest = "http://svcs.ebay.com/services/search/FindingService/v1?" + payload
+	response = urllib2.urlopen(dest)
+	data = json.load(response)
+	if data['getSearchKeywordsRecommendationResponse'][0]['ack'][0] == 'Success':
+		return data['getSearchKeywordsRecommendationResponse'][0]['keywords'][0]
+	else:
+		return keyword
+
 def findItemsByKeywords(keyword):
 
 	url = { 'OPERATION-NAME' : 'findItemsByKeywords', 
@@ -35,10 +52,18 @@ def getUserInfo(username):
 	return userdata
 
 def findData(keyword):
-	data, count = findItemsByKeywords(keyword)
+	keyword.replace (" ", "+")
+	#print keyword
+	#print "\n"
+	recommendedKeyword = getSearchKeywordsRecommendation(keyword)
+	recommendedKeyword.replace(" ","+")
+	#print recommendedKeyword
+	#print "\n\n"
+	data, count = findItemsByKeywords(recommendedKeyword)
 	user = {}
 	userItem = {}
 	categoryItem = {}
+	starUser = {}
 	for i in range(count):
 		item = {}		
 		item["id"] = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]["itemId"][0]
@@ -51,7 +76,8 @@ def findData(keyword):
 		username = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['sellerInfo'][0]['sellerUserName'][0]
 		location = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['location'][0]
 		topRatedSeller = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['sellerInfo'][0]['topRatedSeller'][0]
-		userdata = getUserInfo(username)
+		userdata = getUserInfo(username)		
+		feedbackRatingStar = userdata["FeedbackRatingStar"]
 		userdata['location'] = location
 		userdata['topRatedSeller'] = topRatedSeller
 
@@ -68,9 +94,14 @@ def findData(keyword):
 		else:
 			categoryItem[category["name"]].append(item)
 
-	return user, userItem, categoryItem
+		if feedbackRatingStar not in starUser:
+			starUser[feedbackRatingStar] = [username]
+		else:
+			starUser[feedbackRatingStar].append(username)
 
-'''user, userItem, categoryItem = findData("Harry")
+	return user, userItem, categoryItem, starUser
+
+'''user, userItem, categoryItem, starUser = findData("hrry putter")
 
 print user['easygoing182']
 print "\n"
@@ -78,6 +109,9 @@ print "\n"
 print userItem['easygoing182']
 print "\n"
 
-print categoryItem['Necklaces & Pendants']'''
+print categoryItem['Necklaces & Pendants']
+print "\n"
+
+print starUser'''
 
 
