@@ -68,6 +68,6 @@ def findData(keyword):
 
 	return user, userItem, categoryItem
 
-user, userItem, categoryItem = findData("Harry")
+#user, userItem, categoryItem = findData("Harry")
 
 
