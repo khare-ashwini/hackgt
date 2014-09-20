@@ -14,8 +14,10 @@
 		<script src="../static/js/jquery.min.js"></script>
 		<script src="{{ url_for('static', filename='js/jquery.dropotron.min.js')}}"></script>
 		<script src="{{ url_for('static', filename='js/jquery.scrollgress.min.js')}}"></script>
-		<script src="{{ url_for('static', filename='js/skel.min.js')}}"></script><script src="{{ url_for('static', filename='js/skel-layers.min.js')}}"></script>
-		<script src="{{ url_for('static', filename='js/skel.min.js')}}"></script><script src="{{ url_for('static', filename='js/init.js')}}"></script>
+		<script src="{{ url_for('static', filename='js/skel.min.js')}}"></script>
+		<script src="{{ url_for('static', filename='js/skel-layers.min.js')}}"></script>
+		<script src="{{ url_for('static', filename='js/skel.min.js')}}"></script>
+		<script src="{{ url_for('static', filename='js/init.js')}}"></script>
 		<noscript>
 			<link rel="stylesheet" href="{{ url_for('static', filename='css/skel.css') }}" />
 			<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
@@ -39,7 +41,7 @@
 		<!-- Banner -->
 			<section id="banner">
 				<h2>eBay Discovery</h2>
-				<p>All the information that you wanted to know about sellers and items sold on eBay.</p>
+				<p>A beautiful data visualization of eBay items and sellers</p>
 			<div id="container" style="width:50em;margin:0 auto;">
 				<form action="/submit" method="POST">
 					<div class="row uniform half collapse-at-2">
@@ -60,11 +62,10 @@
 		
 				<section class="box special">
 					<header class="major">
-						<h2>Introducing the ultimate mobile app
-						<br />
-						for doing stuff with your phone</h2>
-						<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc ornare<br />
-						adipiscing nunc adipiscing. Condimentum turpis massa.</p>
+						<h2>The clean and fun way to interact with eBay's API.
+						
+						</h2>
+						<p> Figure out top sellers, and popular items in your area. Enriching your experience with eBay, one seller at a time.</p>
 					</header>
 					<span class="image featured"><img src="/static/images/pic01.jpg" alt="" /></span>
 				</section>
@@ -73,55 +74,25 @@
 					<div class="features-row">
 						<section>
 							<span class="icon major fa-bolt accent2"></span>
-							<h3>Magna etiam</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+							<h3>Fast and Easy</h3>
+							<p>Built with Python and Flask to navigate quickly, help you find the sellers that top the charts, and find the items that you like. </p>
 						</section>
 						<section>
 							<span class="icon major fa-area-chart accent3"></span>
-							<h3>Ipsum dolor</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-						</section>
-					</div>
-					<div class="features-row">
-						<section>
-							<span class="icon major fa-cloud accent4"></span>
-							<h3>Sed feugiat</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-						</section>
-						<section>
-							<span class="icon major fa-lock accent5"></span>
-							<h3>Enim phasellus</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+							<h3>Enriching Graphs</h3>
+							<p>Graphs powered by D3.js, the most interactive map and chart making piece of javascript. 
+							<br>Beautiful graphs, guaranteed.</p>
 						</section>
 					</div>
 				</section>
-					
-				<div class="row">
-					<div class="6u">
 
-						<section class="box special">
-							<span class="image featured"><img src="/static/images/pic02.jpg" alt="" /></span>
-							<h3>Sed lorem adipiscing</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
+				<div class="box special">
+						<section>
+							<span class="icon major fa-cloud accent4"></span>
+							<h3>Powered by eBay's API</h3>
+							<p>All calls provide information to supply to our graphs, so differently timed searchs may appear unique!</p>
 						</section>
-						
 					</div>
-					<div class="6u">
-
-						<section class="box special">
-							<span class="image featured"><img src="/static/images/pic03.jpg" alt="" /></span>
-							<h3>Accumsan integer</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
-						</section>
-
-					</div>
-				</div>
 
 			</section>
 			
