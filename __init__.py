@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+import json
 
 import scripts
 
@@ -23,7 +24,8 @@ def search_query():
 @app.route('/user/<username>')
 def user_page(username):
 	userdata = scripts.getUserInfo(username)
-	return userdata
+	print userdata
+	return json.dumps(userdata)
 	#return "User %s" % username
 
 # App route sample Post
