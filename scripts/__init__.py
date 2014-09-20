@@ -107,7 +107,8 @@ def findData(keyword):
 
 #user, userItem, categoryItem, starUser = findData("hrry putter")
 
-'''print user['easygoing182']
+'''
+print user["easygoing182"]
 print "\n"
 
 print userItem['easygoing182']
@@ -116,6 +117,9 @@ print "\n"
 print categoryItem['Necklaces & Pendants']
 print "\n"
 
-print starUser'''
+print starUser
+'''
+
+print getUserInfo ["easygoing182"]
 
 
