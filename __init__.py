@@ -7,6 +7,10 @@ app = Flask(__name__)
 def hello_world():
     return render_template('index.html')
 
+@app.route('/generic')
+def generic():
+	return render_template('generic.html')
+
 # User Search Page Route
 @app.route('/user/<username>')
 def user_page():
