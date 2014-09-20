@@ -105,7 +105,7 @@ def findData(keyword):
 
 	return user, userItem, categoryItem, starUser
 
-user, userItem, categoryItem, starUser = findData("hrry putter")
+#user, userItem, categoryItem, starUser = findData("hrry putter")
 
 '''print user['easygoing182']
 print "\n"
