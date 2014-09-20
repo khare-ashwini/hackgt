@@ -49,9 +49,11 @@ def findData(keyword):
 		category["name"] = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]["primaryCategory"][0]["categoryName"][0]
 
 		username = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['sellerInfo'][0]['sellerUserName'][0]
-		userdata = getUserInfo(username)
 		location = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['location'][0]
+		topRatedSeller = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['sellerInfo'][0]['topRatedSeller'][0]
+		userdata = getUserInfo(username)
 		userdata['location'] = location
+		userdata['topRatedSeller'] = topRatedSeller
 
 		if username not in user:
 			user[username] = userdata
@@ -62,12 +64,20 @@ def findData(keyword):
 			userItem[username].append(item)
 
 		if category["name"] not in categoryItem:
-			categoryItem["name"] = [item]
+			categoryItem[category["name"]] = [item]
 		else:
-			categoryItem["name"].append(item)
+			categoryItem[category["name"]].append(item)
 
 	return user, userItem, categoryItem
 
-#user, userItem, categoryItem = findData("Harry")
+'''user, userItem, categoryItem = findData("Harry")
+
+print user['easygoing182']
+print "\n"
+
+print userItem['easygoing182']
+print "\n"
+
+print categoryItem['Necklaces & Pendants']'''
 
 
