@@ -1,0 +1,55 @@
+ /*
+    Map.CSS completes the CSS needed for the interactive map for eBay Discovery.
+    */
+
+
+ .stations, .stations svg {
+    position: absolute;
+    color: red; }
+
+  @-webkit-keyframes redPulse {
+    from {
+      fill: #ff8e8e;
+      -webkit-box-shadow: 0 0 9px #333; }
+
+    50% {
+      fill: #ff4444;
+      -webkit-box-shadow: 0 0 18px #91bd09; }
+
+    to {
+      fill: #ff8e8e;
+      -webkit-box-shadow: 0 0 9px #333; } }
+
+  .stations svg {
+    width: 60px;
+    height: 20px;
+    padding-right: 100px;
+    font: 12px sans-serif; }
+
+  .stations circle {
+    fill: red;
+    stroke: black;
+    stroke-width: 1px;
+    -webkit-animation-name: redPulse;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite; }
+
+  .stations circle:hover {
+    fill: blue;
+    cursor: pointer; }
+
+  .marker_text {
+    fill: black;
+    visibility: hidden; }
+
+  html {
+    height: 100%;
+    width: 100%; }
+
+  body {
+    height: 100%;
+    width: 100%; }
+
+  #map_canvas {
+    width: 100%;
+    height: 100%; }

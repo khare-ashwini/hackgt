@@ -16,6 +16,10 @@ def home():
 def generic():
 	return render_template('about.html')
 
+@app.route('/map')
+def map():
+	return render_template('map.html')
+
 @app.route('/search', methods = ['GET'])
 def search_query():
 	q = request.args.get("q")
