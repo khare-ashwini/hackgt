@@ -18,7 +18,7 @@
 			<h3>Top Results</h3>
 				{% for r in results %}
 				<div class="row feature-row">
-					<div class="8u"> <img src="{{ r.galleryURL }}" style="float:left">  {{ r.title }} <p><strong> ${{ r.currentPrice }} </strong></p>  </div>
+					<div class="8u"> <img src="{{ r.galleryURL }}" style="float:left"> <a href="{{r.viewItemURL}}" style="color:rgb(119,119,119);text-decoration:none;border-bottom:none"> {{ r.title }} </a><p><strong> ${{ r.currentPrice }} </strong></p>  </div>
 					<div class="4u"><a href="/user/{{ r.user.sellerUserName[0] }}" ><i class="fa fa-star" style="color:{{ r.user.feedbackRatingStar[0] }}"></i> {{ r.user.sellerUserName[0] }}</a> <p> Feedback Score : <strong>{{ r.user.feedbackScore[0] }} </strong></p> <p style="font-size:0.85em">
 						<small><i class="fa fa-map-marker"></i> {{ r.location }}</small></p> </div>
 				</div>
