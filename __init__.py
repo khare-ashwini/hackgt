@@ -31,6 +31,11 @@ def search_query():
 		#return results
 		return render_template('results.html', q = q, results = scripts.searchData(q,10))
 
+# Return 100 results for a keyword for anaysis
+@app.route('/keyword/<keyword>')
+def get_keyword(keyword):
+	return json.dumps(scripts.searchData(keyword,100))
+
 # User Search Page Route
 @app.route('/user/<username>')
 def user_page(username):
