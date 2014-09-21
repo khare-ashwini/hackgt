@@ -30,8 +30,8 @@ def search_query():
 @app.route('/user/<username>')
 def user_page(username):
 	userdata = scripts.getUserInfo(username)
-	return render_template('user.html', user = userdata)
-	#return "User %s" % username
+	return render_template('user.html', user = userdata[0], feedback = userdata[1])
+	#return json.dumps(userdata)
 
 # App route sample Post
 @app.route('/get/', methods = ['GET', 'POST'] )
