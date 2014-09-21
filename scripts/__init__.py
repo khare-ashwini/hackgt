@@ -82,8 +82,8 @@ def getUserInfo(username):
 		itemData = getItemInfo(entry["ItemID"])
 		#print itemData
 		if itemData['Ack'] != 'Failure':
-			if 'GalleryURL' in itemData['Item']:
-				listImageURL.append(itemData['Item']['GalleryURL'])		
+			if 'PictureURL' in itemData['Item']:
+				listImageURL.append(itemData['Item']['PictureURL'][0])		
 
 	return userdata, feedbackDetails, listImageURL
 
@@ -201,4 +201,4 @@ def findData(keyword, count):
 #print itemList
 #print "\n"
 
-#print getUserInfo('dudescotty')
+#print getUserInfo('revant')
