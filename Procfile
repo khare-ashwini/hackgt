@@ -1,1 +1,1 @@
-web: python __init__.py -i json-rpc
+web: python __init__.py 
