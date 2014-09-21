@@ -2,32 +2,41 @@
 		{% block content %}
 		<header>
 			<h2>{{ user.UserID }}</h2>
-			<p>Your fav Seller</p>
+			<p><a href="{{ user.SellerItemsURL }}" target="_blank">Items Listed</a></p>
 		</header>
-		<div class="box">
-			<h3>User Information</h3>
-			<p>
-			 <ul>
-				<li>FeedbackScore : {{ user.FeedbackScore }} </li>
-				<li>SellerItemsURL : {{ user.SellerItemsURL }} </li>
-				<li>PositiveFeedbackPercent : {{ user.PositiveFeedbackPercent }} </li>
-				<li>FeedbackRatingStar : {{ user.FeedbackRatingStar }} </li>
-				<li>Registration Date : {{ user.RegistrationDate }} </li>
-				<li>FeedbackDetailsURL : {{ user.FeedbackDetailsURL }} </li>
-			 </ul>
-
-			</p>
+		<div class="box">		
 			<div class="row">
 				<div class="6u">
-					<h3>Feedback</h3>
+					<h3>Feedback - Score {{ user.FeedbackScore }}</h3>
 					{% for comment in feedback %}
-					<p>{{ comment.CommentText}} - {{ comment.CommentingUser}}</p>
+					<p>{{ comment.CommentText}} - <strong>{{ comment.CommentingUser }}</strong></p>
 					{% endfor %}
 				</div>
 				<div class="6u">
-					<h3>And another subheading</h3>
-					<p>Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae lorem ipsum adipiscing ac. Vivamus ornare laoreet odio vis praesent.</p>
+					<h3>Stats</h3>
+					Positive Feedback ({{ user.PositiveFeedbackPercent }} %) <p></p>
+					<canvas id="positiveFeedbackPercent" width="200" height="200" data-percent="{{ user.PositiveFeedbackPercent }}"></canvas>
+					<br>
+					<p> Rating : {{ user.FeedbackRatingStar }} </p>
 				</div>
 			</div>
 		</div>
+
+		<script src="/static/js/Chart.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			// Get context with jQuery - using jQuery's .get() method.
+			var ctx = document.getElementById("positiveFeedbackPercent").getContext("2d");
+			var percent = $('#positiveFeedbackPercent').data('percent');
+			console.log(percent);
+			  var data = [
+			    { value: percent, color : '#F39C12' },
+			    { value: 100 - percent, color : '#ECF0F1'}
+			  ]
+
+			  var options = {};
+
+			  var FeedbackChart = new Chart(ctx).Doughnut(data, options);
+		});	
+		</script>
 {% endblock %}

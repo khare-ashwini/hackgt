@@ -40,6 +40,7 @@ def get_keyword(keyword):
 @app.route('/user/<username>')
 def user_page(username):
 	userdata = scripts.getUserInfo(username)
+
 	return render_template('user.html', user = userdata[0], feedback = userdata[1])
 	#return json.dumps(userdata)
 
