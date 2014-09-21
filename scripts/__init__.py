@@ -25,8 +25,8 @@ def findItemsByKeywords(keyword):
 			'SERVICE-VERSION' : '1.12.0',
 			'SECURITY-APPNAME' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9',
 			'RESPONSE-DATA-FORMAT' : 'JSON', 
-			'outputSelector' : 'SellerInfo'}
-			#'paginationInput.entriesPerPage' : '100',
+			'outputSelector' : 'SellerInfo',
+			'paginationInput.entriesPerPage' : '10'}
 			#'paginationInput.pageNumber' : '100'}
 
 	url['keywords'] = keyword
@@ -45,7 +45,8 @@ def getUserInfo(username):
 			'responseencoding' : 'JSON',
 			'appid' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9', 
 			'siteid' : '0',
-			'version' : '525'}
+			'version' : '525',
+			'IncludeSelector' : 'Details'}
 
 	url['UserID'] = username
 	payload = urllib.urlencode(url)
@@ -60,45 +61,51 @@ def getUserInfo(username):
 # param {keyword}
 
 def findData(keyword):
-	print "Search for " + keyword
-	keyword.replace (" ", "+")
-	#print keyword
-	#print "\n"
-	recommendedKeyword = getSearchKeywordsRecommendation(keyword)
-	recommendedKeyword.replace(" ","+")
-	#print recommendedKeyword
-	#print "\n\n"
-	data, count = findItemsByKeywords(recommendedKeyword)
+	#print "Search for " + keyword
+	#keyword.replace (" ", "+")
+	#recommendedKeyword = getSearchKeywordsRecommendation(keyword)
+	#recommendedKeyword.replace(" ","+")
+	#data, count = findItemsByKeywords(recommendedKeyword)
+
+	data, count = findItemsByKeywords(keyword)
 	user = {}
-	userItem = {}
 	categoryItem = {}
 	starUser = {}
-	#print len(data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'])
-	#print "\n"
+	itemList = {}
 	for i in range(count):
+
+		itemDict = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]
+
 		item = {}		
-		item["id"] = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]["itemId"][0]
-		item["title"] = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]["title"][0]
+		item["id"] = itemDict["itemId"][0]
+		item["title"] = itemDict["title"][0]
+		item["categoryName"] = itemDict["primaryCategory"][0]["categoryName"][0]
+		item["galleryURL"] = itemDict["galleryURL"][0]
+		item["viewItemURL"] = itemDict["viewItemURL"][0]
+
+		if "postalCode" in itemDict:
+			item["postalCode"] = itemDict["postalCode"][0]
+
+		item["sellingState"] = itemDict["sellingStatus"][0]["sellingState"][0]
+		item["currentPrice"] = itemDict["sellingStatus"][0]["currentPrice"][0]["__value__"][0]
 
 		category = {}
-		category["id"] = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]["primaryCategory"][0]["categoryId"][0]
-		category["name"] = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]["primaryCategory"][0]["categoryName"][0]
+		category["id"] = itemDict["primaryCategory"][0]["categoryId"][0]
+		category["name"] = itemDict["primaryCategory"][0]["categoryName"][0]
 
-		username = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['sellerInfo'][0]['sellerUserName'][0]
-		location = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['location'][0]
-		topRatedSeller = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]['sellerInfo'][0]['topRatedSeller'][0]
+		username = itemDict['sellerInfo'][0]['sellerUserName'][0]
+		location = itemDict['location'][0]
+		topRatedSeller = itemDict['sellerInfo'][0]['topRatedSeller'][0]
 		userdata = getUserInfo(username)		
 		feedbackRatingStar = userdata["FeedbackRatingStar"]
 		userdata['location'] = location
 		userdata['topRatedSeller'] = topRatedSeller
+		userdata['itemsSold'] = [item]
 
 		if username not in user:
 			user[username] = userdata
-
-		if username not in userItem:
-			userItem[username] = [item]
 		else:
-			userItem[username].append(item)
+			user[username]['itemsSold'].append(item)
 
 		if category["name"] not in categoryItem:
 			categoryItem[category["name"]] = [item]
@@ -110,10 +117,18 @@ def findData(keyword):
 		else:
 			starUser[feedbackRatingStar].append(username)
 
-	return user, userItem, categoryItem, starUser
+		if item["title"] not in itemList:
+			itemList[item["title"]] = item
 
-#user, userItem, categoryItem, starUser = findData("hrry putter")
+	return user, categoryItem, starUser, itemList
 
-#print getUserInfo ["easygoing182"]
+#user, categoryItem, starUser, itemList = findData("harry potter")
 
-
+#print user
+#print "\n"
+#print categoryItem
+#print "\n"
+#print starUser
+#print "\n"
+#print itemList
+#print "\n"
