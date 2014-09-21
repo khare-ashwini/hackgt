@@ -84,21 +84,6 @@ def searchData(keyword):
 
 	return itemList
 
-def userData(username):
-	userdata, feedbackDetails = getUserInfo(username)
-
-	for entry in feedbackDetails:
-		feedbackItem = {}
-		feedbackItem["CommentingUser"] = entry["CommentingUser"]
-		feedbackItem["CommentText"] = entry["CommentText"]
-		feedbackItem["CommentTime"] = entry["CommentTime"]
-		feedbackItem["CommentType"] = entry["CommentType"]
-		feedbackItem["ItemID"] = entry["ItemID"]
-		if 'feedbackDetails' not in userdata:
-			userdata['feedbackDetails'] = [feedbackItem]
-		else:
-			userdata['feedbackDetails'].append(feedbackItem)
-
 def findData(keyword):
 	#print "Search for " + keyword
 	#keyword.replace (" ", "+")
@@ -139,8 +124,7 @@ def findData(keyword):
 		feedbackRatingStar = userdata["FeedbackRatingStar"]
 		userdata['location'] = location
 		userdata['topRatedSeller'] = topRatedSeller
-		userdata['itemsSold'] = [item]
-		
+		userdata['itemsSold'] = [item]		
 
 		for entry in feedbackDetails:
 			feedbackItem = {}
@@ -173,8 +157,6 @@ def findData(keyword):
 			itemList[item["title"]] = item
 
 	return user, categoryItem, starUser, itemList
-
-
 
 #data = searchData("Harry Potter")
 #print data[0]
