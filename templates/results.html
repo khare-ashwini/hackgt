@@ -1,0 +1,25 @@
+{% extends "generic.html" %}
+		{% block content %}
+		<header>
+			<h2>{{ q }}</h2>
+			<p>Search Query</p>
+		</header>
+		<div class="box">
+			<h3>Results</h3>
+				{% for r in results %}
+				<div class="row">
+					<div class="8u"> <img src="{{ r.galleryURL }}" style="float:left">  {{ r.title }} <p><strong> ${{ r.currentPrice }} </strong></p>  </div>
+					<div class="4u">{{ r.user.sellerUserName[0] }} - {{ r.user.feedbackRatingStar[0] }} - {{ r.user.feedbackScore[0] }} <br> {{ r.location }} </div>
+				</div>
+				{% endfor %}
+			<div class="row">
+				<div class="6u">
+					<h3>Categories</h3>
+				</div>
+				<div class="6u">
+					<h3>And another subheading</h3>
+					<p>Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae lorem ipsum adipiscing ac. Vivamus ornare laoreet odio vis praesent.</p>
+				</div>
+			</div>
+		</div>
+{% endblock %}

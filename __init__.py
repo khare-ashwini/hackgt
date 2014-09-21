@@ -23,8 +23,9 @@ def search_query():
 		return redirect(url_for('home'))
 	else : 		
 		page = request.args.get("p")
-		return json.dumps(scripts.findData(q))
-		#return "Search for " + q
+		results = json.dumps(scripts.searchData(q))
+		#return results
+		return render_template('results.html', q = q, results = scripts.searchData(q))
 
 # User Search Page Route
 @app.route('/user/<username>')
