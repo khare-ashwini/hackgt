@@ -38,6 +38,23 @@ def findItemsByKeywords(keyword, count):
 	count = int(data["findItemsByKeywordsResponse"][0]['searchResult'][0]['@count'])
 	return data, count
 
+#Get Item Info
+
+def getItemInfo(itemID):
+	url = {'callname' : 'GetSingleItem',
+			'responseencoding' : 'JSON',
+			'appid' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9', 
+			'siteid' : '0',
+			'version' : '525',
+			'ItemID' : itemID,
+			'IncludeSelector' : 'Description,ItemSpecifics'}
+
+	payload = urllib.urlencode(url)
+	dest = "http://open.api.ebay.com/shopping?" + payload
+	response = urllib2.urlopen(dest)
+	itemData = json.load(response)
+	return itemData
+
 # Returns basic info for username
 
 def getUserInfo(username):
@@ -55,7 +72,14 @@ def getUserInfo(username):
 	data = json.load(response)
 	userdata = data["User"]
 	feedbackDetails = data["FeedbackDetails"]
-	return userdata, feedbackDetails
+
+	listImageURL = []
+
+	for entry in feedbackDetails:
+		itemData = getItemInfo(entry["ItemID"])
+		listImageURL.append(itemData['Item']['GalleryURL'])		
+
+	return userdata, feedbackDetails, listImageURL
 
 
 # Items to be displayed in Search Result
@@ -170,3 +194,5 @@ def findData(keyword, count):
 #print "\n"
 #print itemList
 #print "\n"
+
+#print getUserInfo('dudescotty')
