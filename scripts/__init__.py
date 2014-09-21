@@ -78,12 +78,17 @@ def getUserInfo(username):
 
 	listImageURL = []
 
+	i = 1
+
 	for entry in feedbackDetails:
+		i = i+1
 		itemData = getItemInfo(entry["ItemID"])
 		#print itemData
 		if itemData['Ack'] != 'Failure':
 			if 'PictureURL' in itemData['Item']:
 				listImageURL.append(itemData['Item']['PictureURL'][0])		
+		if i>3:
+			break
 
 	return userdata, feedbackDetails, listImageURL
 
