@@ -61,6 +61,44 @@ def getUserInfo(username):
 # Items to be displayed in Search Result
 # param {keyword}
 
+def searchData(keyword):
+	data, count = findItemsByKeywords(keyword)
+	itemList = []
+
+	for i in range(count):
+		itemDict = data["findItemsByKeywordsResponse"][0]['searchResult'][0]['item'][i]
+
+		item = {}		
+		item["id"] = itemDict["itemId"][0]
+		item["title"] = itemDict["title"][0]
+		item["categoryName"] = itemDict["primaryCategory"][0]["categoryName"][0]
+		item["galleryURL"] = itemDict["galleryURL"][0]
+		item["viewItemURL"] = itemDict["viewItemURL"][0]
+		item["sellingState"] = itemDict["sellingStatus"][0]["sellingState"][0]
+		item["currentPrice"] = itemDict["sellingStatus"][0]["currentPrice"][0]["__value__"]
+		item["location"] = itemDict["location"][0]
+		item["user"] = itemDict['sellerInfo'][0]
+
+		if item not in itemList:
+			itemList.append(item)
+
+	return itemList
+
+def userData(username):
+	userdata, feedbackDetails = getUserInfo(username)
+
+	for entry in feedbackDetails:
+		feedbackItem = {}
+		feedbackItem["CommentingUser"] = entry["CommentingUser"]
+		feedbackItem["CommentText"] = entry["CommentText"]
+		feedbackItem["CommentTime"] = entry["CommentTime"]
+		feedbackItem["CommentType"] = entry["CommentType"]
+		feedbackItem["ItemID"] = entry["ItemID"]
+		if 'feedbackDetails' not in userdata:
+			userdata['feedbackDetails'] = [feedbackItem]
+		else:
+			userdata['feedbackDetails'].append(feedbackItem)
+
 def findData(keyword):
 	#print "Search for " + keyword
 	#keyword.replace (" ", "+")
@@ -136,6 +174,10 @@ def findData(keyword):
 
 	return user, categoryItem, starUser, itemList
 
+
+
+#data = searchData("Harry Potter")
+#print data[0]
 #user, categoryItem, starUser, itemList = findData("harry potter")
 
 #print user
