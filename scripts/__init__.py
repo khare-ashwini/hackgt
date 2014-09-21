@@ -88,7 +88,7 @@ def findData(keyword):
 			item["postalCode"] = itemDict["postalCode"][0]
 
 		item["sellingState"] = itemDict["sellingStatus"][0]["sellingState"][0]
-		item["currentPrice"] = itemDict["sellingStatus"][0]["currentPrice"][0]["__value__"][0]
+		item["currentPrice"] = itemDict["sellingStatus"][0]["currentPrice"][0]["__value__"]
 
 		category = {}
 		category["id"] = itemDict["primaryCategory"][0]["categoryId"][0]
