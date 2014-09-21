@@ -32,4 +32,16 @@
 				</div>
 			</div>
 		</div>
+		<script>
+		$(document).ready(function(){
+			var q = $($('h2')).text();
+			$.getJSON('/keyword/' + q, function(res){
+				var locations = [];
+				for(i in res){
+					locations.push(res[i].location);
+				}
+				console.log(locations)
+			})
+		});
+		</script>
 {% endblock %}
