@@ -30,7 +30,6 @@ def search_query():
 @app.route('/user/<username>')
 def user_page(username):
 	userdata = scripts.getUserInfo(username)
-	print userdata
 	return render_template('user.html', user = userdata)
 	#return "User %s" % username
 
