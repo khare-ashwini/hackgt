@@ -19,14 +19,14 @@ def getSearchKeywordsRecommendation(keyword):
 	else:
 		return keyword
 
-def findItemsByKeywords(keyword):
+def findItemsByKeywords(keyword, count):
 
 	url = { 'OPERATION-NAME' : 'findItemsByKeywords', 
 			'SERVICE-VERSION' : '1.12.0',
 			'SECURITY-APPNAME' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9',
 			'RESPONSE-DATA-FORMAT' : 'JSON', 
 			'outputSelector' : 'SellerInfo',
-			'paginationInput.entriesPerPage' : '10'}
+			'paginationInput.entriesPerPage' : count}
 			#'paginationInput.pageNumber' : '100'}
 
 	url['keywords'] = keyword
@@ -61,8 +61,8 @@ def getUserInfo(username):
 # Items to be displayed in Search Result
 # param {keyword}
 
-def searchData(keyword):
-	data, count = findItemsByKeywords(keyword)
+def searchData(keyword, count):
+	data, count = findItemsByKeywords(keyword, count)
 	itemList = []
 
 	for i in range(count):
@@ -84,14 +84,14 @@ def searchData(keyword):
 
 	return itemList
 
-def findData(keyword):
+def findData(keyword, count):
 	#print "Search for " + keyword
 	#keyword.replace (" ", "+")
 	#recommendedKeyword = getSearchKeywordsRecommendation(keyword)
 	#recommendedKeyword.replace(" ","+")
 	#data, count = findItemsByKeywords(recommendedKeyword)
 
-	data, count = findItemsByKeywords(keyword)
+	data, count = findItemsByKeywords(keyword, count)
 	user = {}
 	categoryItem = {}
 	starUser = {}
@@ -158,9 +158,9 @@ def findData(keyword):
 
 	return user, categoryItem, starUser, itemList
 
-#data = searchData("Harry Potter")
+#data = searchData("Harry Potter", 10)
 #print data[0]
-#user, categoryItem, starUser, itemList = findData("harry potter")
+#user, categoryItem, starUser, itemList = findData("harry potter", 10)
 
 #print user
 #print "\n"
