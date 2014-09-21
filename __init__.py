@@ -14,7 +14,7 @@ def home():
 
 @app.route('/generic')
 def generic():
-	return render_template('generic.html')
+	return render_template('about.html')
 
 @app.route('/search', methods = ['GET'])
 def search_query():
