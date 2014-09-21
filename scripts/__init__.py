@@ -41,7 +41,8 @@ def findItemsByKeywords(keyword, count):
 #Get Item Info
 
 def getItemInfo(itemID):
-	url = {'callname' : 'GetSingleItem',
+	try:
+		url = {'callname' : 'GetSingleItem',
 			'responseencoding' : 'JSON',
 			'appid' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9', 
 			'siteid' : '0',
@@ -49,11 +50,13 @@ def getItemInfo(itemID):
 			'ItemID' : itemID,
 			'IncludeSelector' : 'Description,ItemSpecifics'}
 
-	payload = urllib.urlencode(url)
-	dest = "http://open.api.ebay.com/shopping?" + payload
-	response = urllib2.urlopen(dest)
-	itemData = json.load(response)
-	return itemData
+		payload = urllib.urlencode(url)
+		dest = "http://open.api.ebay.com/shopping?" + payload
+		response = urllib2.urlopen(dest)
+		itemData = json.load(response)
+		return itemData
+	except:
+		return None
 
 # Returns basic info for username
 
@@ -77,7 +80,10 @@ def getUserInfo(username):
 
 	for entry in feedbackDetails:
 		itemData = getItemInfo(entry["ItemID"])
-		listImageURL.append(itemData['Item']['GalleryURL'])		
+		#print itemData
+		if itemData['Ack'] != 'Failure':
+			if 'PictureURL' in itemData['Item']:
+				listImageURL.append(itemData['Item']['PictureURL'][0])		
 
 	return userdata, feedbackDetails, listImageURL
 
@@ -195,4 +201,4 @@ def findData(keyword, count):
 #print itemList
 #print "\n"
 
-#print getUserInfo('dudescotty')
+#print getUserInfo('revant')
