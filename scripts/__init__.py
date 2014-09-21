@@ -46,7 +46,7 @@ def getUserInfo(username):
 			'appid' : 'GeorgiaI-927c-4229-856a-e1ec1717d0b9', 
 			'siteid' : '0',
 			'version' : '525',
-			'IncludeSelector' : 'Details'}
+			'IncludeSelector' : 'Details,FeedbackDetails'}
 
 	url['UserID'] = username
 	payload = urllib.urlencode(url)
@@ -54,7 +54,8 @@ def getUserInfo(username):
 	response = urllib2.urlopen(dest)
 	data = json.load(response)
 	userdata = data["User"]
-	return userdata
+	feedbackDetails = data["FeedbackDetails"]
+	return userdata, feedbackDetails
 
 
 # Items to be displayed in Search Result
@@ -96,11 +97,24 @@ def findData(keyword):
 		username = itemDict['sellerInfo'][0]['sellerUserName'][0]
 		location = itemDict['location'][0]
 		topRatedSeller = itemDict['sellerInfo'][0]['topRatedSeller'][0]
-		userdata = getUserInfo(username)		
+		userdata, feedbackDetails = getUserInfo(username)		
 		feedbackRatingStar = userdata["FeedbackRatingStar"]
 		userdata['location'] = location
 		userdata['topRatedSeller'] = topRatedSeller
 		userdata['itemsSold'] = [item]
+		
+
+		for entry in feedbackDetails:
+			feedbackItem = {}
+			feedbackItem["CommentingUser"] = entry["CommentingUser"]
+			feedbackItem["CommentText"] = entry["CommentText"]
+			feedbackItem["CommentTime"] = entry["CommentTime"]
+			feedbackItem["CommentType"] = entry["CommentType"]
+			feedbackItem["ItemID"] = entry["ItemID"]
+			if 'feedbackDetails' not in userdata:
+				userdata['feedbackDetails'] = [feedbackItem]
+			else:
+				userdata['feedbackDetails'].append(feedbackItem)
 
 		if username not in user:
 			user[username] = userdata
