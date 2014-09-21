@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 import json
+from flask import request, redirect, url_for
 
 import scripts
 
@@ -8,17 +9,22 @@ app = Flask(__name__)
 
 # Home page route
 @app.route('/')
-def hello_world():
+def home():
     return render_template('index.html')
 
 @app.route('/generic')
 def generic():
 	return render_template('generic.html')
 
-@app.route('/search', methods = ['POST'])
+@app.route('/search', methods = ['GET'])
 def search_query():
-	pass
-	# Do Something
+	q = request.args.get("q")
+	if q is None:
+		return redirect(url_for('home'))
+	else : 		
+		page = request.args.get("p")
+		return json.dumps(scripts.findData(q))
+		#return "Search for " + q
 
 # User Search Page Route
 @app.route('/user/<username>')

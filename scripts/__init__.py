@@ -38,6 +38,8 @@ def findItemsByKeywords(keyword):
 	count = int(data["findItemsByKeywordsResponse"][0]['searchResult'][0]['@count'])
 	return data, count
 
+# Returns basic info for username
+
 def getUserInfo(username):
 	url = {'callname' : 'GetUserProfile',
 			'responseencoding' : 'JSON',
@@ -53,7 +55,12 @@ def getUserInfo(username):
 	userdata = data["User"]
 	return userdata
 
+
+# Items to be displayed in Search Result
+# param {keyword}
+
 def findData(keyword):
+	print "Search for " + keyword
 	keyword.replace (" ", "+")
 	#print keyword
 	#print "\n"
@@ -106,19 +113,6 @@ def findData(keyword):
 	return user, userItem, categoryItem, starUser
 
 #user, userItem, categoryItem, starUser = findData("hrry putter")
-
-'''
-print user["easygoing182"]
-print "\n"
-
-print userItem['easygoing182']
-print "\n"
-
-print categoryItem['Necklaces & Pendants']
-print "\n"
-
-print starUser
-'''
 
 #print getUserInfo ["easygoing182"]
 
