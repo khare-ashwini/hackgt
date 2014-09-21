@@ -31,7 +31,7 @@ def search_query():
 def user_page(username):
 	userdata = scripts.getUserInfo(username)
 	print userdata
-	return json.dumps(userdata)
+	return render_template('user.html', user = userdata)
 	#return "User %s" % username
 
 # App route sample Post
