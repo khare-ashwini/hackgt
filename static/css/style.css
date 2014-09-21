@@ -1227,7 +1227,6 @@
 		background-repeat: repeat,							no-repeat;
 		background-size: auto,							cover;
 		color: #fff;
-		padding: 12em 0 20em 0;
 		text-align: center;
 	}
 
@@ -1251,6 +1250,15 @@
 			margin-bottom: 1.75em;
 		}
 
+		#banner input[type="search"],
+		#banner input[type="password"],
+		#banner input[type="email"],
+		#banner select,
+		#banner textarea {
+			color: #ffffff;
+			background: rgba(255, 255, 255, 0.15);
+		}
+
 		#banner input[type="submit"],
 		#banner input[type="reset"],
 		#banner input[type="button"],
@@ -1258,7 +1266,7 @@
 			background-color: transparent;
 			box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
 			color: #fff;
-			min-width: 12em;
+			min-width: 5em;
 		}
 
 			#banner input[type="submit"]:hover,
@@ -1281,6 +1289,18 @@
 			#banner .button.special {
 				background: #fff;
 				color: #666 !important;
+			}
+
+			.input-center {
+				padding: 0 0 0 7rem;
+				position: static;
+				clear: none;
+			}
+
+			.input-discovery {
+				padding: 6px;
+				border-radius: 6px;
+				font-size: 13pt;
 			}
 
 /* Main */
