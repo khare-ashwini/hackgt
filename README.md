@@ -19,11 +19,11 @@ ____________________
 
 Used Finding API and Shopping API
 
-Methods used for API Calls from Finding API
+Methods used for API Calls from Finding API:
 * getSearchKeywordsRecommendation: Get recommended keywords for search
 * findItemsByKeywords: Search items by keywords
 
-Methods used for API Calls from Shopping API
+Methods used for API Calls from Shopping API:
 * GetUserProfile: Retrieve eBay user profile and feedback information
 * GetSingleItem: Simplified buyer specific view of item data
 
